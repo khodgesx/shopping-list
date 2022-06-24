@@ -19,7 +19,7 @@ require('./db-utils/connect')
 
 
 
-
+const listController = require('./controllers/listController')
 const itemController = require('./controllers/itemController')
 const userController = require('./controllers/userController')
 
@@ -57,10 +57,11 @@ app.use(async (req, res, next)=>{
     next()
 })
 
+app.use('/lists', listController)
 app.use('/items', itemController)
 app.use('/users', userController)
 
 const port = process.env.PORT || 3001
 app.listen(port, ()=>{
-    console.log('app running')
+    console.log(`app running on port ${port}`)
 })

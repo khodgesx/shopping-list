@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const listSchema = new Schema({
     title: String,
+    category: String,
     items: [],
     user: { type: Schema.Types.ObjectId, ref: 'User' }
 }, { timestamps: true })
