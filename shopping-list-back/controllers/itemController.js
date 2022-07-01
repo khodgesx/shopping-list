@@ -1,86 +1,28 @@
 const express = require('express')
 const router = express()
-const itemController = require('../models/item')
+const Item = require('../models/item')
 const User = require('../models/user')
 
 
-//index
-//get wines by user ID
-// router.get('/user/:id', async (req, res)=>{
-//     const userId = await User.findById(req.params.id)
-//     const wines = await Wine.find({user:userId})
-//     try{
-//         res.send({
-//             success:true,
-//             data: wines
-//         })
-        
-//     }catch(err){
-//         res.send({
-//             success:false, 
-//             data:err.message
-//         })
-//     }
-// })
 
-// //create route - saving from spoonacular api
-// router.post ('/:id', async (req, res)=>{
-//     try{
-//     const wineData = req.body 
-//         const newWine = await Wine.create({
-//             name: wineData.name,
-//             varietal: wineData.varietal,
-//             img: wineData.img,
-//             mealPairs:wineData.mealPairs,
-//             notes: wineData.notes,
-//             rating: wineData.rating,
-//             type: wineData.type,
-//             apiId: wineData.apiId,
-//             user: req.params.id
-//         })
-//             res.send({
-//                 success:true,
-//                 data: newWine
-//             })
-               
-//     }catch(err){
-//         console.log(err)
-//         res.send({
-//             success:false,
-//             data:err.message
-//         })
-
-//     }
-// })
-// //create new wine with photo upload
-// router.post ('/new/:id', upload.single('img'), async (req, res)=>{
-//         try{
-//         const wineData = req.body 
-//             const newWine = await Wine.create({
-//                 name: wineData.name,
-//                 varietal: wineData.varietal,
-//                 img: wineData.img,
-//                 mealPairs:wineData.mealPairs,
-//                 notes: wineData.notes,
-//                 rating: wineData.rating,
-//                 apiId: wineData.apiId,
-//                 type: wineData.type,
-//                 user: req.params.id
-//             })
-//                 res.send({
-//                     success:true,
-//                     data: newWine
-//                 })
-                   
-//         }catch(err){
-//             console.log(err)
-//             res.send({
-//                 success:false,
-//                 data:err.message
-//             })
+router.post ('/', async (req, res)=>{
+    try{
     
-//         }
-//     })
+    const newItem = await Item.create(req.body)
+    console.log(newItem)
+        res.send({
+            success:true,
+            data: newItem
+        })
+    }catch(err){
+        res.send({
+            success:false,
+            data:err.message
+        })
+
+    }
+})
+
 
 // //show
 // router.get('/:id', async (req, res)=>{

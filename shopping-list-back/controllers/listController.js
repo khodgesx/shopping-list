@@ -57,4 +57,35 @@ router.post ('/', async (req, res)=>{
     }
 })
 
+//add item to list/update list item array:
+router.put('/:id/add', async(req, res)=>{
+    try{
+        const currentList = await List.findById(req.params.id)
+        const newItem = req.body;
+        currentList.items.push(newItem) // if this doesn't work try setting variable to currentList.items then doing variable.push
+        await currentList.save()
+    }catch(err){
+        console.log(err)
+    }
+})
+
+//update list:
+// router.put('/:id', async (req, res)=>{
+//     const list = await List.findByIdAndUpdate(req.params.id, req.body, {new:true})
+//     console.log(req.body)
+   
+//     try{
+//         res.send({
+//             success:true,
+//             data: list
+//         })
+
+//     }catch(err){
+//         res.send({
+//             success:false, 
+//             data:err.message
+//         })
+//     }
+// })
+
 module.exports = router
