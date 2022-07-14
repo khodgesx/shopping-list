@@ -62,13 +62,33 @@ router.put('/:id/add', async(req, res)=>{
     try{
         const currentList = await List.findById(req.params.id)
         const newItem = req.body;
+        console.log(req.body)
         currentList.items.push(newItem) // if this doesn't work try setting variable to currentList.items then doing variable.push
         await currentList.save()
+        console.log(currentList, newItem, currentList.items)
     }catch(err){
         console.log(err)
     }
 })
 
+router.delete('/:id', async (req, res)=>{
+    const list = await List.findByIdAndDelete(req.params.id)
+    if(!list){
+        throw new Error('No list by that id')
+    }
+    try{
+        res.send({
+            success:true,
+            data: list
+        })
+
+    }catch(err){
+        res.send({
+            success:false, 
+            data:err.message
+        })
+    }
+})
 //update list:
 // router.put('/:id', async (req, res)=>{
 //     const list = await List.findByIdAndUpdate(req.params.id, req.body, {new:true})
