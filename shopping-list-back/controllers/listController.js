@@ -63,7 +63,8 @@ router.put('/:id/add', async(req, res)=>{
         const currentList = await List.findById(req.params.id)
         const newItem = req.body;
         console.log(req.body)
-        currentList.items.push(newItem) // if this doesn't work try setting variable to currentList.items then doing variable.push
+        const listItems = currentList.items;
+        listItems.push(newItem) 
         await currentList.save()
         console.log(currentList, newItem, currentList.items)
     }catch(err){
